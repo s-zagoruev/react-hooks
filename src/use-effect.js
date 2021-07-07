@@ -6,9 +6,11 @@ const App = () => {
   const [visible, setVisible] = useState(true)
 
   useEffect(() => {
-    console.log('useEffect');
+    console.log('useEffect')
 
-    return () => { console.log('clear') }
+    return () => {
+      console.log('clear')
+    }
   }, [value])
 
   if (visible) {
@@ -26,6 +28,28 @@ const App = () => {
 }
 
 const HookCounter = ({value}) => {
+
+  // //"analog" componentDidMount
+  // useEffect(() => {
+  //   console.log('mount')
+  // }, [])
+  //
+  // //"analog" componentWillUnmount
+  // useEffect(() => {
+  //   return () => console.log('will unmount')
+  // }, [])
+
+  //combination _mount_ and _unmount_
+  useEffect(() => {
+    console.log('mount')
+    return () => console.log('will unmount');
+  }, [])
+
+  //"analog" componentDidUpdate
+  useEffect(() => {
+    console.log('did update')
+  })
+
   return <p>{value}</p>
 }
 
