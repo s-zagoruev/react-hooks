@@ -42,7 +42,7 @@ const HookCounter = ({value}) => {
   //combination _mount_ and _unmount_
   useEffect(() => {
     console.log('mount')
-    return () => console.log('will unmount');
+    return () => console.log('will unmount')
   }, [])
 
   //"analog" componentDidUpdate
