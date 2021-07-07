@@ -20,12 +20,28 @@ const App = () => {
         <button onClick={() => setVisible(false)}>hide</button>
         <ClassCounter value={value}/>
         <HookCounter value={value}/>
+        <Notification/>
       </div>
     )
   } else {
     return <button onClick={() => setVisible(true)}>show</button>
   }
 }
+
+const Notification = () => {
+  const [visible, setVisible] = useState(true)
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setVisible(false), 1500)
+
+    //in case if component wil be unmounted before setVisible executes !!!
+    //Memory leak prevent
+    return () => clearTimeout(timeout)
+  }, [])
+
+  return visible ? <div><p>Hello</p></div> : null
+}
+
 
 const HookCounter = ({value}) => {
 
@@ -42,6 +58,7 @@ const HookCounter = ({value}) => {
   //combination _mount_ and _unmount_
   useEffect(() => {
     console.log('mount')
+
     return () => console.log('will unmount')
   }, [])
 
